@@ -1,13 +1,20 @@
 #include "Money.h"
 #include <tuple>
+#include <iomanip>
 
 
 
-Money::Money(int a = 0, int b = 0, double c = 0) : pound(a), shilling(b), pence(c)
+Money::Money(int a = 0, int b = 0, double c = 0) : pound(a), shilling(b)
 {
 	if (b >= 20 || c >= 12 || a < 0 || b < 0 || c < 0) {
 		throw MoneyException::WrongData;
 	}
+	double da = c - static_cast<int>(c);
+	double db = static_cast<int>(c);
+	da *= 4;
+	da = static_cast<int>(da);
+	da /= 4;
+	pence = da + db;
 }
 
 Money Money::operator+(const Money& rhs) const
@@ -95,6 +102,6 @@ std::ostream& operator<<(std::ostream& out, const Money& rhs)
 	if (rhs.pence != 0 || (rhs.pound == 0 && rhs.shilling == 0))
 	{
 		out << rhs.pence << "p.";
-	}
+		}
 	return out;
 }
