@@ -58,7 +58,7 @@ Money Money::operator-(const Money& rhs) const
 	}
 	if (c < 0 && b == 0 && a > 0) {
 		c = 12 + c;
-		b = 11;
+		b = 19;
 		a--;
 	}
 	obj.pound = a;
